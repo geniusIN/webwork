@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>watch.html</title>
+</head>
+<body>
+  <div id="app">
+    이름: {{fullname}}
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          firstname: "길동",
+          lastname: "홍",
+          fullname: ''
+        }
+      },
+      methods: { },
+      mounted(){},
+      computed: { },
+      watch: {// watch는 각각 지정, 처음에는 출력이 안됨, 변경이 있을 때마다 계산.
+        firstname(){
+          this.fullname = this.firstname + this.lastname;
+        },
+        lastname(){
+          this.fullname = this.firstname + this.lastname;
+        }
+      }
+      
+    }).mount("#app");
+  </script>
+
+</body>
+</html>

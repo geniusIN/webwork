@@ -1,0 +1,18 @@
+<script>
+export default{
+  props : ["title"],
+  data(){
+    return{
+
+    }
+  },
+  methods: {},
+  mounted(){},
+  watch: {}
+}
+</script>
+<template>
+  <div class="alert alert-warning">
+    <h2>{{ title }} {{ subtitle }}</h2>
+  </div>
+</template>
