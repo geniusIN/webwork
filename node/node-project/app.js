@@ -1,4 +1,5 @@
 const express = require('express')
+const { param } = require('../express-app/routes')
 const app = express()
 const port = 3000
 
@@ -56,14 +57,6 @@ let data = [
       "salary": "13"
     },
     {
-      "id": "a18e",
-      "first_name": "a"
-    },
-    {
-      "id": "803e",
-      "first_name": "a"
-    },
-    {
       "id": "7",
       "first_name": "Robb",
       "last_name": "Gauche",
@@ -83,19 +76,39 @@ let data = [
   app.get('/', (req, res) => {
     res.send('hello')
   })
-  
+
+// 전체 조회
 app.get('/emp', (req, res) => {
   res.send(data)
 })
 
-// 부서가 10번인 첫번째 사원 return
+// 단건 조회
+app.get('/emp/:id', (req, res) => {
+  let id = req.params.id
+  let result = data.find((d)=>d.id==id)
+  if(result)
+    res.send(result)
+  else
+    res.send("not found")
+})
+
+// 부서가 10번인 첫번째 사원 return       find?departmentId=10
 app.get('/find', (req, res) => {
-  res.send('find hello')
+  let departmentId = req.query.departmentId
+  let result = data.filter((emp)=>emp.department_id==departmentId)
+  if(result)
+    res.send(result)
+  else
+    res.send("그런 부서는 없어요.")
 })
 
 // job_id가 'it'인 사원만 조회
 app.get('/filter', (req, res) => {
-  res.send('filter hello')
+  let jobId = req.query.jobId
+
+  let result = data.filter((emp)=>emp.job_id==jobId)
+
+  res.send(result)
 })
 
 // firstname 순으로 정렬
