@@ -2,26 +2,28 @@
   <div class="container">
     <form @submit.prevent>
       <label for="no">No.</label>
-      <input type="text" id="no"  readonly />
+      <input type="text" id="no"  readonly v-model="boardInfo.id"/>
 
       <label for="title">제목</label>
-      <input type="text" id="title"/>
+      <input type="text" id="title" v-model="boardInfo.title"/>
 
       <label for="writer">작성자</label>
-      <input type="text" id="writer" />
+      <input type="text" id="writer" v-model="boardInfo.writer"/>
 
       <label for="content">내용</label>
       <textarea
         id="content"
         style="height: 200px"
+        v-model="boardInfo.content"
       ></textarea>
 
       <label for="regdate">작성일자</label>
-      <input type="text" readonly />
+      <input type="text" readonly id="regdate" v-model="dateFormat"/>
 
       <button
         type="button"
         class="btn btn-xs btn-info"
+        @click="updateBoard"
       >
         저장
       </button>
@@ -45,12 +47,28 @@ export default {
       this.getBoardInfo();
     }
   },
+  computed:{
+    dateFormat(){
+      return this.boardInfo.created_date//.substr(0,10);
+    }
+  },
   methods:{
     async getBoardInfo() {
       let result = await axios.get(`http://localhost:3000/board/${this.searchNo}`);
-      this.boardInfo = result.data;
+      this.boardInfo = result.data[0];
+    },
+    async updateBoard() {
+      try {
+        await axios.put(`http://localhost:3000/board/${this.boardInfo.id}`, this.boardInfo);
+        alert("저장되었습니다.");
+        this.$router.push("/board");
+      } catch (error) {
+        console.error("수정 실패:", error);
+        alert("수정에 실패했습니다.");
+      }
     }
   }
+ 
 }
 </script>
 <style scoped>

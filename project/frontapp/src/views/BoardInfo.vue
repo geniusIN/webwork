@@ -48,11 +48,17 @@
     <div class="row">
 
     </div>
+    <div>
+      <CommentComp :bid="boardInfo.id"/>
+    </div>
   </div>
+
 </template>
 <script>
 import axios from 'axios';
+import CommentComp from '@/components/CommentComp.vue';
 export default {
+  components:{CommentComp},
   data(){
     return{
       searchNo:"",
@@ -66,7 +72,7 @@ export default {
   methods:{
     async getBoardInfo() {
       let result = await axios.get(`http://localhost:3000/board/${this.searchNo}`);
-      this.boardInfo = result.data;
+      this.boardInfo = result.data[0];
     },
     goToUpdateForm(id){
       this.$router.push({ path: "/boardForm", query: {id : id}})

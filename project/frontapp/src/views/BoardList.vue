@@ -15,8 +15,8 @@
           <td>{{ board.id }}</td>
           <td>{{ board.title }}</td>
           <td>{{ board.writer }}</td>
+          <td>{{ board.content }}</td>
           <td>{{ board.createDate }}</td>
-          <td>{{ board.comment }}</td>
         </tr>
       </tbody>
     </table>
@@ -24,7 +24,7 @@
 </template>
 <script>
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:3000/board"
+axios.defaults.baseURL = "http://localhost:3000"
 export default {
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
   },
   methods:{
     async fetchList(){
-      let result = await axios.get("http://localhost:3000/board");
+      let result = await axios.get(`/board`);
       this.boardList = result.data;
     },
     goToDetail(id){
