@@ -49,7 +49,7 @@
 
     </div>
     <div>
-      <CommentComp :bid="boardInfo.id"/>
+      <CommentComp v-if="boardInfo.id" :boardId="boardInfo.id"/>
     </div>
   </div>
 

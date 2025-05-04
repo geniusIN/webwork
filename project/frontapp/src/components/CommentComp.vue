@@ -8,11 +8,33 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 export default {
-    props: [],
+    props: ["boardId"],
     data() {
-        return {};
+        return {
+            comments: [],
+            newComment:""
+        };
     },
+    async mounted() {
+        const res = await axios.get(`http://localhost:3000/comment/${this.boardId}`);
+        this.commets = res.data;
+    },
+    methods: {
+        async addCommetn() {
+            await axios.post("http://localhost:3000/comment", {
+                board_id: this.boardId,
+                writer: "익명",
+                content: this.newComment
+            });
+            this. newComment = "";
+            const res = await axios.get(`http://localhost:3000/comment/${this.boardId}`);
+            this.comments = res.data;
+        }
+    }
 };
 </script>
-<style></style>
+<style>
+
+</style>
