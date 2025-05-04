@@ -1,10 +1,8 @@
 const sqlList = {
-  selectList : "select * from comment",
-  selectById : "select * from comment where id=?",
-  insertInfo : "insert comment set ?",
-  updateInfo : "update comment set ? where id = ?",
-  deleteInfo : "delete from comment where id = ?"
-
-}
+    selectByBoardId: "SELECT * FROM comment WHERE board_id = ? ORDER BY created_at ASC",
+    insert: "INSERT INTO comment (board_id, writer, content) VALUES (?, ?, ?)",
+    delete: "DELETE FROM comment WHERE comment_id = ?",
+    update: "UPDATE comment SET content = ? WHERE comment_id = ?",
+};
 
 module.exports = sqlList;
