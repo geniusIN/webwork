@@ -15,8 +15,8 @@
           <td>{{ board.id }}</td>
           <td>{{ board.title }}</td>
           <td>{{ board.writer }}</td>
-          <td>{{ board.content }}</td>
           <td>{{ board.createDate }}</td>
+          <td>{{ board.comment_count }}</td>
         </tr>
       </tbody>
     </table>

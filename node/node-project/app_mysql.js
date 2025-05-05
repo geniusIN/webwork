@@ -16,7 +16,7 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-//라우터터 설정
+//라우터 설정
 app.get("/", (req, res) => {
     res.send("hello");
 });
