@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const customerList = require("./customersql");
 const boardList = require("./boardsql");
 const commentList = require("./commentsql");
+
 const sqllist = { customers: customerList, board: boardList, comment: commentList };
 // sqllist["customer"]["selectList"]
 

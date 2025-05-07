@@ -21,31 +21,32 @@
       </tbody>
     </table>
   </div>
+  {{ route.fullPath }}
 </template>
-<script>
+ 
+<script setup>
 import axios from 'axios';
-axios.defaults.baseURL = "api/"
-export default {
-  data() {
-    return {
-      boardList:[]
-    }
-  },
-  methods:{
-    async fetchList(){
-      let result = await axios.get(`/board`);
-      this.boardList = result.data;
-    },
-    goToDetail(id){
-      // query: ?id=1                param: boardInfo/1
-      this.$router.push({ path: "/boardInfo", query: {id : id}})
-    }
-    
-  },
-  created(){
-    this.fetchList();
-  }
+import {ref, defineProps} from 'vue';
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+const boardList = ref([]);  
+
+const getBoardList = async() => {
+  let result = await axios.get('/api/board');
+  boardList.value = result.data;
+};
+
+// const goToDetail = () => {}; 똑같다.
+function goToDetail(){
+  router.push('/')
 }
+
+// 라우터와 라우트의 차이점?
+
+getBoardList();
+
 </script>
 <style scoped>
 table * {

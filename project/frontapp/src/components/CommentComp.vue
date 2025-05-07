@@ -18,18 +18,18 @@ export default {
         };
     },
     async mounted() {
-        const res = await axios.get(`http://localhost:3000/comment/${this.boardId}`);
+        const res = await axios.get(`/api/comment/${this.boardId}`);
         this.comments = res.data;
     },
     methods: {
         async addComment() {
-            await axios.post("http://localhost:3000/comment", {
+            await axios.post("/api/comment", {
                 board_id: this.boardId,
                 writer: "익명",
                 content: this.newComment
             });
             this. newComment = "";
-            const res = await axios.get(`http://localhost:3000/comment/${this.boardId}`);
+            const res = await axios.get(`/api/comment/${this.boardId}`);
             this.comments = res.data;
         }
     }

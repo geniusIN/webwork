@@ -56,31 +56,41 @@
 </template>
 <script>
 import axios from 'axios';
-import CommentComp from '@/components/CommentComp.vue';
-export default {
-  components:{CommentComp},
-  data(){
-    return{
-      searchNo:"",
-      boardInfo:{}
-    };
-  },
-  created(){
-    this.searchNo = this.$route.query.id;
-    this.getBoardInfo();
-  },
-  methods:{
-    async getBoardInfo() {
-      let result = await axios.get(`/api/board/${this.searchNo}`);
-      this.boardInfo = result.data[0];
-    },
-    goToUpdateForm(id){
-      this.$router.push({ path: "/boardForm", query: {id : id}})
-    },
-    goToListForm(){
-      this.$router.push({ path: "/board"})
-    }
+
+const serchNo = "";
+const boardInfo = {};
+const router = userRouter();
+const route = useRoute();
+
+const getBoardInfo = async() => {
+  let result = await axios.get(`api/board/${searchNo}`);
+  boardInfo = result.data[0];
+}
+function goToUpdateForm(id){
+  router.push({path: '/boardForm', query: {id : id}})
+}
+function goToListForm(){
+  router.push('/board')
+}
+
+// async getBoardInfo() {
+//       let result = await axios.get(`/api/board/${this.searchNo}`);
+//       this.boardInfo = result.data[0];
+//     },
+    // goToUpdateForm(id){
+    //   this.$router.push({ path: "/boardForm", query: {id : id}})
+    // },
+    // goToListForm(){
+    //   this.$router.push({ path: "/board"})
+    // }
+  
+  function onCreated(){
+    this.searchNo = route.query.id;
+    getBoardInfo();
   }
   
-}
+  
+  
+  
+
 </script>

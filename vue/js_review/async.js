@@ -2,7 +2,7 @@
 // axios = require('axios')
 
 // function getBoard(){
-//   axios("http://localhost:3000/board/1")
+//   axios("/api/board/1")
 //   .then(res => console.log("2",res.data.title))
 // }
 
@@ -13,7 +13,7 @@
 axios = require('axios')
 
 async function getBoard(){
-  let res = await axios.get("http://localhost:3000/board/1")
+  let res = await axios.get("/api/board/1")
   console.log("2:",res.data.title);
 }
 

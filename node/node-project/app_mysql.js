@@ -36,9 +36,10 @@ app.get("/", (req, res) => {
     res.send("hello");
 });
 
-app.use("/customer", require("./routes/customer"));
-app.use("/board", require("./routes/board"));
-app.use("/comment", require("./routes/comment"));
+app.use("/api/customer", require("./routes/customer"));
+app.use("/api/board", require("./routes/board"));
+app.use("/api/comment", require("./routes/comment"));
+app.use("/api/users", require("./routes/users"));
 
 app.listen(port, () => {
     console.log(`http://localhost:${port} 서버 실행됨`);

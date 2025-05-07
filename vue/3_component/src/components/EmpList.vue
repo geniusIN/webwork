@@ -23,7 +23,7 @@
 
 <script>
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:3000/emp";// axios 기본 주소
+axios.defaults.baseURL = "/api/emp";// axios 기본 주소
 export default {
   data(){
     return{

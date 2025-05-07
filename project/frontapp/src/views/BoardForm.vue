@@ -54,12 +54,12 @@ export default {
   },
   methods:{
     async getBoardInfo() {
-      let result = await axios.get(`http://localhost:3000/board/${this.searchNo}`);
+      let result = await axios.get(`/api/board/${this.searchNo}`);
       this.boardInfo = result.data[0];
     },
     async updateBoard() {
       try {
-        await axios.put(`http://localhost:3000/board/${this.boardInfo.id}`, this.boardInfo);
+        await axios.put(`/api/board/${this.boardInfo.id}`, this.boardInfo);
         alert("저장되었습니다.");
         this.$router.push("/board");
       } catch (error) {

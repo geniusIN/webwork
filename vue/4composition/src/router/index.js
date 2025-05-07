@@ -1,34 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import BoardList from '@/views/BoardList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    
-    {
-      path: '/boardTable',
-      name: 'boardTable',
-      component: () => import('../views/BoardTable.vue'),
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue'),
-    },
-    {
-      path: '/boardForm',
-      name: 'boardForm',
-      component: () => import('../views/BoardForm.vue'),
-    },
-    {
-      path: '/boardInfo',
-      name: 'boardInfo',
-      component: () => import('../views/BoardInfo.vue'),
-    },
     {
       path: '/board',
       name: 'board',
-      component: () => import('../views/BoardList.vue'),
+      component: BoardList,
     },
     {
       path: '/',

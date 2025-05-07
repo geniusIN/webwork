@@ -78,7 +78,7 @@
 
 <script>
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:3000/emp";
+axios.defaults.baseURL = "http://api/emp";
 
   export default{
     data() {
@@ -91,7 +91,7 @@ axios.defaults.baseURL = "http://localhost:3000/emp";
 
     methods:{
       fetchDeptList(){
-        axios.get("http://localhost.3000/dept")
+        axios.get("http://api/dept")
              .then(response => this.depts = response.data)
       }
       },
