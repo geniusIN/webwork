@@ -3,7 +3,6 @@ const cors = require("cors");
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
 
-
 require("dotenv").config({ path: "./mysql/.env" });
 
 const app = express();
@@ -21,25 +20,22 @@ app.use(session({
     store: new fileStore() // 세션 저장소로 fileStore 사용
     }));
 
-const corsOptions = {
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200,
-};
+    const corsOptions = {
+      origin: "http://localhost:5173",
+      optionsSuccessStatus: 200,
+  };
 
-app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+  app.use(cors(corsOptions));
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
 
-//라우트 설정
-app.get("/", (req, res) => {
-    res.send("hello");
-});
+  // 라우트 설정
+  app.get("/", (req, res) => {
+    res.send("hello books");
+  })
 
-app.use("/api/customer", require("./routes/customer"));
-app.use("/api/board", require("./routes/board"));
-app.use("/api/comment", require("./routes/comment"));
-app.use("/api/users", require("./routes/users"));
+  app.use("/api/book", require("./routes/book"))
 
-app.listen(port, () => {
+  app.listen(port, () => {
     console.log(`http://localhost:${port} 서버 실행됨`);
-});
+  })

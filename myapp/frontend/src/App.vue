@@ -5,16 +5,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/board">게시판</RouterLink>
-        <RouterLink to="/nested">nested</RouterLink>
-        <RouterLink to="/component">component</RouterLink>
-        <RouterLink to="/provideInject">provideInject</RouterLink>
-        <RouterLink to="/watch">watch</RouterLink>
+        <RouterLink to="/book">book</RouterLink>
+        <RouterLink to="/bookDetail">책설명</RouterLink>
       </nav>
     </div>
   </header>
