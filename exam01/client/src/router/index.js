@@ -8,7 +8,7 @@ const routes = [
 
   {
     path: '/post',
-    name: 'BoarForm',
+    name: 'boardForm',
     component: BoardForm
   },
   {

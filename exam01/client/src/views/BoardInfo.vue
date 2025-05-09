@@ -68,7 +68,7 @@ const getBoardInfo = async () => {
 };
 
 const goToUpdateForm = (no) => {
-  router.push({ path: '/boardForm', query: {no} });
+  router.push({ path: '/post', query: {no} });
 };
 
 onMounted(()=>{

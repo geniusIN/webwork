@@ -22,7 +22,7 @@
       <input type="text" id="createdDate" v-model="createdDate" readonly />
 
       <button type="submit" class="btn btn-xs btn-info">
-        등록
+        {{ isUpdateMode ? '수정' : '등록' }}
       </button>
     </form>
   </div>
@@ -34,10 +34,11 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      boardInfo: {    
+      boardInfo: {  
         title: '',
         writer: '',
-        content: ''
+        content: '',
+        isnew: true
       },
       createdDate: this.formatDate(new Date())
     };
@@ -58,7 +59,16 @@ export default {
         console.error('등록 실패:', error);
         alert('등록에 실패했습니다.');
       }
+    },
+     async fetchBoard(no) {
+    try {
+      const res = await axios.get(`/board/${no}`);
+      this.boardInfo = res.data[0];
+    } catch (err) {
+      console.error('게시글 불러오기 실패:', err);
+      alert('글 정보를 불러오지 못했습니다.');
     }
+  }
   }
 };
 </script>
