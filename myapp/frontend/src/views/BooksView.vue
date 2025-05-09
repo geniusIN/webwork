@@ -53,7 +53,7 @@ const formattedBookList = computed(() =>
     }))
 );
 
-function goToDetail() {
-    router.push("/bookDetail");
+function goToDetail(id) {
+    router.push({path: "/bookDetail", query: {id:id}});
 }
 </script>

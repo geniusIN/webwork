@@ -7,6 +7,16 @@ const router = createRouter({
   routes: [
    
     {
+      path: '/store',
+      name: 'store',
+      component: () => import('../views/StoreView.vue'),
+    },
+    {
+      path: '/vuetify',
+      name: 'vuetify',
+      component: () => import('../views/Vuetify.vue'),
+    },
+    {
       path: '/slot',
       name: 'slot',
       component: () => import('../views/Slot.vue'),

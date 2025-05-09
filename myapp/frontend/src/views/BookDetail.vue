@@ -5,21 +5,21 @@
                 <thead>
                     <tr>
                         <th>번호</th>
-                        <td>{{ book.value.id }}</td>
+                        <td>{{ bookDetail.id }}</td>
 
                         <th>제목</th>
-                        <td>{{ book.value.title }}</td>
+                        <td>{{ bookDetail.title }}</td>
 
                         <th>저자</th>
-                        <td>{{ book.value.writer }}</td>
+                        <td>{{ bookDetail.writer }}</td>
 
                         <th>출판사</th>
-                        <td>{{ book.value.publisher }}</td>
+                        <td>{{ bookDetail.publisher }}</td>
                     </tr>
 
                     <tr>
                         <th>등록일자</th>
-                        <td>{{ book.value.dateFormat }}</td>
+                        <td>{{ bookDetail.dateFormat }}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +30,12 @@
                             }}</pre>
                         </td>
                     </tr>
+                    <div class="container">
+                      <BookReview :bookId="route.query.id"/>
+                    </div>
                     <tr>
                         <td colspan="6" class="text-center">
-                            <button class="btn btn-xs btn-info" @click="goToUpdateForm(boardInfo.id)">수정</button>
+                            <button class="btn btn-xs btn-info" @click="goToUpdateForm(bookDetail.id)">수정</button>
                             <button class="btn btn-xs btn-info" @click="goToListForm()">목록</button>
                         </td>
                     </tr>
@@ -41,24 +44,29 @@
         </div>
     </div>
 </template>
-<script>
+<script setup>
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch } from "vue";
+import BookReview from "@/components/BookReview.vue";
 
-const serchNo = "";
-const bookDetail = {};
+const searchNo = ref("");
+const bookDetail = ref({});
 const router = useRouter();
 const route = useRoute();
-const book = ref({});
 
 const getBookDetail = async () => {
-    const getBookDetail = async () => {
-        const searchNo = route.query.id;
-        const result = await axios.get(`/api/book/${searchNo}`);
-        book.value = result.data[0];
-    };
+  const result = await axios.get(`/api/book/${route.query.id}`);
+  const book = result.data[0];
+  bookDetail.value = {
+    ...book,
+    dateFormat: book?.update_date
+      ? new Date(book.update_date.replace(" ", "T")).toLocaleDateString("ko-KR")
+      : "날짜 없음"
+  };
 };
+
+
 function goToUpdateForm(id) {
     router.push({ path: "/reviewForm", query: { id: id } });
 }
@@ -68,7 +76,7 @@ function goToListForm() {
 
 onMounted(() => {
     if (route.query.id) {
-        getBookDetail();
+        getBookDetail();  
     }
 });
 

@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
+<div class="container">
     <div class="row">
       <table class="table table-bordered">
         <thead>
           <tr>
             <th scope="col" class="text-center table-primary">번호</th>
-            <td scope="col" class="text-center">{{ boardInfo.id }}</td>
+            <td scope="col" class="text-center">{{ boardInfo.no }}</td>
             <th scope="col" class="text-center table-primary">작성일</th>
             <td scope="col" class="text-center">
-              {{ boardInfo.created_date }}
+              {{ boardInfo.created_dt }}
             </td>
             <th scope="col" class="text-center table-primary">이름</th>
             <td scope="col" class="text-center">{{ boardInfo.writer }}</td>
@@ -31,12 +31,8 @@
           <tr>
             <td colspan="6" class="text-center">
               <button
-                class="btn btn-xs btn-info" @click="goToUpdateForm(boardInfo.id)">
+                class="btn btn-xs btn-info" @click="goToUpdateForm(boardInfo.no)">
                 수정
-              </button>
-              <button
-                class="btn btn-xs btn-info" @click="goToListForm()">
-                목록
               </button>
              
             </td>
@@ -49,48 +45,33 @@
 
     </div>
     <div>
-      <CommentComp v-if="boardInfo.id" :boardId="boardInfo.id"/>
+      <CommentComp v-if="boardInfo.no" :boardNo="boardInfo.no"/>
     </div>
   </div>
-
 </template>
-<script>
-import axios from 'axios';
 
-const searchNo = "";
-const boardInfo = {};
+<script setup>
+import axios from 'axios';
+import {ref, onMounted} from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import CommentComp from '@/components/CommentComp.vue';
+
 const router = useRouter();
 const route = useRoute();
 
-const getBoardInfo = async() => {
-  let result = await axios.get(`api/board/${searchNo}`);
-  boardInfo = result.data[0];
-}
-function goToUpdateForm(id){
-  router.push({path: '/boardForm', query: {id : id}})
-}
-function goToListForm(){
-  router.push('/board')
-}
+const boardInfo = ref({});
+const searchNo = ref(route.query.no);
 
-// async getBoardInfo() {
-//       let result = await axios.get(`/api/board/${this.searchNo}`);
-//       this.boardInfo = result.data[0];
-//     },
-    // goToUpdateForm(id){
-    //   this.$router.push({ path: "/boardForm", query: {id : id}})
-    // },
-    // goToListForm(){
-    //   this.$router.push({ path: "/board"})
-    // }
-  
-  function onCreated(){
-    this.searchNo = route.query.id;
-    getBoardInfo();
-  }
-  
-  
-  
-  
+const getBoardInfo = async () => {
+  const result = await axios.get(`/board/${searchNo.value}`);
+  boardInfo.value = result.data[0];
+};
 
+const goToUpdateForm = (no) => {
+  router.push({ path: '/boardForm', query: {no} });
+};
+
+onMounted(()=>{
+  getBoardInfo();
+});
 </script>

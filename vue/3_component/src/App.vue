@@ -14,6 +14,8 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/parent">부모컴포넌트!!!!</RouterLink>
         <RouterLink to="/emp">emp컴포넌트ㅎ</RouterLink>
         <RouterLink to="/slot">슬롯</RouterLink>
+        <RouterLink to="/vuetify">vuetify</RouterLink>
+        <RouterLink to="/store">store</RouterLink>
       </nav>
     </div>
   </header>
