@@ -1,20 +1,20 @@
 <template>
   <div>
-    <textarea v-model="reviewText" rows="3" class="form-control"></textarea>
+    <textarea v-model="reviewText" rows="3" class="form-control" style="width: 600px"></textarea>
     <button class="btn btn-primary mt-2" @click="submitReview">등록</button>
 
     <ul class="list-group mt-3" v-if="reviewList.length">
-      <li v-for="rewview in reviewList" :key="review.review_id" class="list-group-item">
+      <li v-for="review in reviewList" :key="review.review_id" class="list-group-item">
         <strong>{{ review.writer || "익명" }}</strong>: {{ review.content }}
       </li>
     </ul>
   </div>
 </template>
 
-<script>
+<script setup>
 import {ref, onMounted} from "vue";
 import axios from "axios";
-defineProps({bookId: String});
+const {bookId} = defineProps({bookId: String});
 
 const reviewText = ref("");
 const reviewList = ref([]);

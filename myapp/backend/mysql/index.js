@@ -1,8 +1,9 @@
 // mysql 모듈 로드
 const mysql = require("mysql2");
 const bookList = require("./booksql");
+const reviewList = require("./reviewsql")
 
-const sqllist = { book:bookList };
+const sqllist = { book:bookList , review:reviewList};
 
 // mysql 접속 정보
 const conn = {

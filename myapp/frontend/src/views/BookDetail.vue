@@ -18,7 +18,7 @@
                     </tr>
 
                     <tr>
-                        <th>등록일자</th>
+                        <th>출간일</th>
                         <td>{{ bookDetail.dateFormat }}</td>
                     </tr>
                 </thead>
@@ -30,17 +30,17 @@
                             }}</pre>
                         </td>
                     </tr>
-                    <div class="container">
-                      <BookReview :bookId="route.query.id"/>
-                    </div>
                     <tr>
                         <td colspan="6" class="text-center">
-                            <button class="btn btn-xs btn-info" @click="goToUpdateForm(bookDetail.id)">수정</button>
-                            <button class="btn btn-xs btn-info" @click="goToListForm()">목록</button>
+                            <button class="btn btn-xs btn-info" @click="goToListForm()" style="margin-top: 50px;">목록으로</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="container">
+                <div class="section-title">📝 리뷰</div>
+                <BookReview :bookId="route.query.id" />
+            </div>
         </div>
     </div>
 </template>
@@ -48,7 +48,7 @@
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch } from "vue";
-import BookReview from "@/components/BookReview.vue";
+import BookReview from "../views/BookReview.vue"
 
 const searchNo = ref("");
 const bookDetail = ref({});
@@ -88,3 +88,17 @@ watch(
     { immediate: true }
 );
 </script>
+
+<style scoped>
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+
+
+</style>

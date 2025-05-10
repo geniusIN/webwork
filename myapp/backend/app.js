@@ -35,6 +35,7 @@ app.use(session({
   })
 
   app.use("/api/book", require("./routes/book"))
+  app.use("/api/review", require("./routes/review"))
 
   app.listen(port, () => {
     console.log(`http://localhost:${port} 서버 실행됨`);
